@@ -92,7 +92,7 @@ function CheckoutPage() {
         razorpayOrderId: pay.razorpayOrderId,
         razorpayPaymentId: pay.paymentId,
         createdAt: new Date().toISOString(),
-        status: "confirmed",
+        status: "Ordered",
         items,
         subtotal,
         shipping,
@@ -105,6 +105,34 @@ function CheckoutPage() {
       navigate({ to: "/confirmation/$orderId", params: { orderId } });
     } catch (e: any) {
       toast.error(e?.message ?? "Payment failed");
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  // TEMP DEMO FUNCTION — remove before going live
+  const skipPaymentDemo = async () => {
+    const err = validate();
+    if (err) { toast.error(err); return; }
+    setBusy(true);
+    const orderId = generateOrderId();
+    try {
+      const order: SavedOrder = {
+        orderId,
+        razorpayOrderId: "demo_order_" + orderId,
+        razorpayPaymentId: "demo_pay_" + orderId,
+        createdAt: new Date().toISOString(),
+        status: "Ordered",
+        items,
+        subtotal,
+        shipping,
+        total,
+        customer: form,
+      };
+      saveOrder(order);
+      submitOrderToSheet(order).catch(() => {});
+      clear();
+      navigate({ to: "/confirmation/$orderId", params: { orderId } });
     } finally {
       setBusy(false);
     }
@@ -155,6 +183,15 @@ function CheckoutPage() {
             className="w-full rounded-full bg-primary px-6 py-4 text-sm font-semibold text-primary-foreground hover:opacity-90 disabled:opacity-60"
           >
             {busy ? "Processing…" : `Pay ₹${total.toLocaleString("en-IN")}`}
+          </button>
+
+          {/* TEMP DEMO LINK — remove before going live */}
+          <button
+            disabled={busy}
+            onClick={skipPaymentDemo}
+            className="w-full text-center text-xs text-muted-foreground underline hover:text-foreground"
+          >
+            Skip payment (demo) — test checkout flow
           </button>
         </div>
 

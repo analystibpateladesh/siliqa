@@ -30,7 +30,7 @@ function TopBar() {
               <span>·</span>
               <span>BUY 2 · SAVE ₹99</span>
               <span>·</span>
-              <span>12-MONTH WARRANTY</span>
+              <span>PAN-INDIA Shipping</span>
               <span>·</span>
               <span>7-DAY EASY RETURNS</span>
               <span>·</span>
@@ -165,15 +165,15 @@ function Footer() {
   };
 
   return (
-    <footer className="border-t border-footer-foreground/10 bg-footer text-footer-foreground">
+    <footer className="border-t border-footer-foreground/10 bg-footer text-white">
       <div className="mx-auto max-w-7xl px-4 md:px-8 py-16">
         <div className="grid gap-12 md:grid-cols-5">
           <div className="md:col-span-2">
             <div className="flex items-center gap-2">
               <div className="h-8 w-8 rounded-full bg-chrome" />
-              <span className="font-display text-2xl font-bold">{BRAND.name}</span>
+              <span className="font-display text-2xl font-bold text-white">{BRAND.name}</span>
             </div>
-            <p className="mt-4 max-w-sm text-sm text-footer-foreground/70">
+            <p className="mt-4 max-w-sm text-sm text-white/70">
               {BRAND.tagline}. {BRAND.sub}
             </p>
             <form
@@ -187,13 +187,13 @@ function Footer() {
                 required
                 disabled={busy}
                 placeholder="Email for early access"
-                className="flex-1 bg-transparent text-sm outline-none placeholder:text-footer-foreground/50 disabled:opacity-60"
+                className="flex-1 bg-transparent text-sm outline-none placeholder:text-white/50 text-white disabled:opacity-60"
               />
               <button
                 type="submit"
                 disabled={busy}
                 aria-label="Submit email for early access"
-                className="grid h-9 w-9 place-items-center rounded-full bg-footer-foreground text-footer hover:opacity-90 disabled:opacity-60"
+                className="grid h-9 w-9 place-items-center rounded-full bg-white text-footer hover:opacity-90 disabled:opacity-60"
               >
                 <ArrowRight className="h-4 w-4" />
               </button>
@@ -230,7 +230,7 @@ function Footer() {
         </div>
 
         <div className="mt-12 flex flex-col-reverse gap-4 border-t border-footer-foreground/10 pt-6 md:flex-row md:items-center md:justify-between">
-          <p className="text-xs text-footer-foreground/60">
+          <p className="text-xs text-white/60">
             © {new Date().getFullYear()} {BRAND.name}. All rights reserved.
           </p>
           <div className="flex items-center gap-3">
@@ -239,7 +239,7 @@ function Footer() {
                 key={i}
                 href="#"
                 aria-label={label}
-                className="grid h-9 min-w-9 place-items-center rounded-full border border-footer-foreground/20 px-3 text-[10px] font-semibold uppercase tracking-widest hover:bg-footer-foreground/10"
+                className="grid h-9 min-w-9 place-items-center rounded-full border border-footer-foreground/20 px-3 text-[10px] font-semibold uppercase tracking-widest text-white hover:bg-footer-foreground/10"
               >
                 {label}
               </a>
@@ -254,13 +254,13 @@ function Footer() {
 function FooterCol({ title, links }: { title: string; links: { to: string; label: string }[] }) {
   return (
     <div>
-      <h4 className="font-display text-sm font-semibold uppercase tracking-widest text-primary-foreground/80">
+      <h4 className="font-display text-sm font-semibold uppercase tracking-widest text-white/80">
         {title}
       </h4>
       <ul className="mt-4 space-y-2 text-sm">
         {links.map((l, i) => (
           <li key={i}>
-            <Link to={l.to} className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+            <Link to={l.to} className="text-white/70 hover:text-white transition-colors">
               {l.label}
             </Link>
           </li>

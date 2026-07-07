@@ -54,7 +54,7 @@ export type SavedOrder = {
   razorpayOrderId?: string;
   razorpayPaymentId?: string;
   createdAt: string;
-  status: "confirmed" | "packed" | "shipped" | "delivered";
+  status: "Ordered" | "Packed" | "Dispatched" | "Shipped" | "Delivered";
   items: CartItem[];
   subtotal: number;
   shipping: number;

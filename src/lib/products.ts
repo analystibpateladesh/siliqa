@@ -1,7 +1,8 @@
-import chromeHero from "@/assets/chrome-hero.jpg";
-import chrome1 from "@/assets/chrome-1.jpg";
-import chrome2 from "@/assets/chrome-2.jpg";
-import chrome3 from "@/assets/chrome-3.jpg";
+import Hero from "@/assets/4.png";
+import chrome1 from "@/assets/1.png";
+import chrome2 from "@/assets/2.png";
+import chrome3 from "@/assets/3.png";
+import chrome4 from "@/assets/7.png";
 
 export type PricingTier = { qty: number; price: number; label: string };
 
@@ -23,10 +24,10 @@ export type Product = {
 
 export const PRODUCTS: Product[] = [
   {
-    id: "chromepro-earphones",
-    name: "Chromepro Earphones",
+    id: "chromepro-earphones(type-c)",
+    name: "ChromePro Earphones (Type-C)",
     tagline: "Mirror-finish sound. Molded to move.",
-    images: [chromeHero, chrome1, chrome2, chrome3],
+    images: [Hero, chrome1, chrome2, chrome3, chrome4],
     mrp: 1299,
     tiers: [
       { qty: 1, price: 599, label: "Buy 1" },

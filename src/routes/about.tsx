@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { BRAND } from "@/lib/config";
-import heroImg from "@/assets/chrome-hero.jpg";
+import heroImg from "@/assets/4.png";
 
 export const Route = createFileRoute("/about")({
   head: () => ({

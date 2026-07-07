@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Zap, Battery, Waves, ShieldCheck, Star } from "lucide-react";
 import heroImg from "@/assets/4.png";
-import chrome1 from "@/assets/2.png";
+import chrome1 from "@/assets/ad.png";
 import chrome3 from "@/assets/chrome-ist.png";
 import { PRODUCTS } from "@/lib/products";
 
@@ -94,8 +94,8 @@ function HomePage() {
       </section>
 
       {/* FEATURE 1 */}
-      <section className="mx-auto max-w-7xl px-4 md:px-8 py-24">
-        <div className="grid gap-12 md:grid-cols-2 md:items-center">
+      <section className="mx-auto max-w-7xl px-4 md:px-8 pt-0 pb-24">
+        <div className="grid gap-0 md:grid-cols-2 md:items-center">
           <img
             src={chrome1}
             alt="Chromepro on black"
@@ -137,7 +137,7 @@ function HomePage() {
 
       {/* PRODUCT CTA */}
       <section className="border-y border-border bg-primary text-primary-foreground">
-        <div className="mx-auto grid max-w-7xl gap-10 px-4 md:px-8 py-24 md:grid-cols-[1.2fr_1fr] md:items-center">
+        <div className="mx-auto grid max-w-7xl gap-10 px-4 md:px-8 py-0 md:grid-cols-[1.2fr_1fr] md:items-center">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.25em] text-primary-foreground/60">
               Featured
