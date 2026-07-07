@@ -1,0 +1,127 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chrome: var(--chrome);
+  --color-footer: var(--footer);
+  --color-footer-foreground: var(--footer-foreground);
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Footer stays black in every theme (per product design). */
+:root, .dark {
+  --footer: oklch(0 0 0);
+  --footer-foreground: oklch(1 0 0);
+}
+
+:root {
+  --radius: 0.75rem;
+  --background: oklch(0.99 0 0);
+  --foreground: oklch(0.12 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.12 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.12 0 0);
+  --primary: oklch(0.12 0 0);
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.96 0 0);
+  --secondary-foreground: oklch(0.12 0 0);
+  --muted: oklch(0.96 0 0);
+  --muted-foreground: oklch(0.45 0 0);
+  --accent: oklch(0.94 0 0);
+  --accent-foreground: oklch(0.12 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.99 0 0);
+  --border: oklch(0.9 0 0);
+  --input: oklch(0.9 0 0);
+  --ring: oklch(0.12 0 0);
+  --chrome: linear-gradient(135deg, oklch(0.85 0.005 250) 0%, oklch(0.98 0 0) 40%, oklch(0.7 0.008 250) 100%);
+}
+
+.dark {
+  --background: oklch(0.08 0 0);
+  --foreground: oklch(0.98 0 0);
+  --card: oklch(0.11 0 0);
+  --card-foreground: oklch(0.98 0 0);
+  --popover: oklch(0.11 0 0);
+  --popover-foreground: oklch(0.98 0 0);
+  --primary: oklch(0.98 0 0);
+  --primary-foreground: oklch(0.08 0 0);
+  --secondary: oklch(0.16 0 0);
+  --secondary-foreground: oklch(0.98 0 0);
+  --muted: oklch(0.16 0 0);
+  --muted-foreground: oklch(0.65 0 0);
+  --accent: oklch(0.18 0 0);
+  --accent-foreground: oklch(0.98 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(0.22 0 0);
+  --input: oklch(0.22 0 0);
+  --ring: oklch(0.98 0 0);
+}
+
+@layer base {
+  * { border-color: var(--color-border); }
+  html { scroll-behavior: smooth; }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4, h5 { font-family: var(--font-display); letter-spacing: -0.02em; }
+}
+
+@utility text-chrome {
+  background: linear-gradient(135deg, #a8a8a8 0%, #f5f5f5 40%, #7a7a7a 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility bg-chrome {
+  background: linear-gradient(135deg, #c0c0c0 0%, #f5f5f5 40%, #808080 100%);
+}
+
+@utility marquee-track {
+  animation: marquee 30s linear infinite;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@utility hover-lift {
+  transition: transform 400ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 400ms;
+  &:hover { transform: translateY(-4px); }
+}
