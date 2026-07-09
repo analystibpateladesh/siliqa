@@ -1,4 +1,5 @@
 // Runtime config — replace via .env / secrets when live.
+// Public Razorpay key exposed to the browser.
 export const RAZORPAY_KEY_ID =
   (import.meta.env.VITE_RAZORPAY_KEY_ID as string | undefined) ?? "";
 export const APPS_SCRIPT_ORDERS_URL =

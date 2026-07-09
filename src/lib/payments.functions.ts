@@ -2,6 +2,8 @@ import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { createHmac, timingSafeEqual } from "crypto";
 
+const getEnvValue = (name: string) => process.env[name] ?? process.env[`VITE_${name}`] ?? "";
+
 const createOrderInput = z.object({
   amount: z.number().int().positive(), // in paise
   receipt: z.string().max(40),
@@ -11,8 +13,8 @@ const createOrderInput = z.object({
 export const createRazorpayOrder = createServerFn({ method: "POST" })
   .inputValidator((data: unknown) => createOrderInput.parse(data))
   .handler(async ({ data }) => {
-    const keyId = process.env.RAZORPAY_KEY_ID;
-    const keySecret = process.env.RAZORPAY_KEY_SECRET;
+    const keyId = getEnvValue("RAZORPAY_KEY_ID");
+    const keySecret = getEnvValue("RAZORPAY_KEY_SECRET");
     if (!keyId || !keySecret) {
       throw new Error("Razorpay is not configured. Missing RAZORPAY_KEY_ID/RAZORPAY_KEY_SECRET.");
     }
@@ -51,7 +53,7 @@ const verifyInput = z.object({
 export const verifyRazorpayPayment = createServerFn({ method: "POST" })
   .inputValidator((data: unknown) => verifyInput.parse(data))
   .handler(async ({ data }) => {
-    const keySecret = process.env.RAZORPAY_KEY_SECRET;
+    const keySecret = getEnvValue("RAZORPAY_KEY_SECRET");
     if (!keySecret) throw new Error("Razorpay is not configured.");
 
     const expected = createHmac("sha256", keySecret)
