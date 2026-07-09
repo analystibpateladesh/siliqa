@@ -7,7 +7,7 @@ import { generateOrderId, openRazorpay, submitOrderToSheet } from "@/lib/order-u
 import { createRazorpayOrder, verifyRazorpayPayment } from "@/lib/payments.functions";
 
 export const Route = createFileRoute("/checkout")({
-  head: () => ({ meta: [{ title: "Checkout — siliqa" }, { name: "robots", content: "noindex" }] }),
+  head: () => ({ meta: [{ title: "Checkout — welded" }, { name: "robots", content: "noindex" }] }),
   component: CheckoutPage,
 });
 

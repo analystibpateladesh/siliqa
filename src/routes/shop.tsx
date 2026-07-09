@@ -5,9 +5,9 @@ import { PRODUCTS } from "@/lib/products";
 export const Route = createFileRoute("/shop")({
   head: () => ({
     meta: [
-      { title: "Shop — siliqa" },
-      { name: "description", content: "Shop premium electronics from siliqa. Chromepro Earphones and more coming soon." },
-      { property: "og:title", content: "Shop — siliqa" },
+      { title: "Shop — welded" },
+      { name: "description", content: "Shop premium electronics from welded. Chromepro Earphones and more coming soon." },
+      { property: "og:title", content: "Shop - welded" },
     ],
   }),
   component: ShopPage,
@@ -21,7 +21,7 @@ function ShopPage() {
           <p className="text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground">Shop</p>
           <h1 className="mt-2 font-display text-5xl font-bold tracking-tight md:text-6xl">All Products</h1>
           <p className="mt-3 max-w-lg text-muted-foreground">
-            Every siliqa product, engineered without compromise. Free shipping across India.
+            Every welded product, engineered without compromise. Free shipping across India.
           </p>
         </div>
         <div className="text-sm text-muted-foreground">{PRODUCTS.length} product{PRODUCTS.length > 1 ? "s" : ""}</div>

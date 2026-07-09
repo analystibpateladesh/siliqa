@@ -45,7 +45,7 @@ export const useCart = create<CartState>()(
       count: () => get().items.reduce((n, i) => n + i.qty, 0),
       subtotal: () => get().items.reduce((n, i) => n + i.unitPrice * i.qty, 0),
     }),
-    { name: "siliqa-cart" },
+    { name: "welded-cart" },
   ),
 );
 
@@ -84,7 +84,7 @@ export const useOrders = create<OrdersState>()(
       save: (o) => set((s) => ({ orders: { ...s.orders, [o.orderId]: o } })),
       get: (id) => get().orders[id],
     }),
-    { name: "siliqa-orders" },
+    { name: "welded-orders" },
   ),
 );
 
@@ -111,6 +111,6 @@ export const useTheme = create<ThemeState>()(
         }
       },
     }),
-    { name: "siliqa-theme" },
+    { name: "welded-theme" },
   ),
 );

@@ -1,14 +1,14 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { BRAND } from "@/lib/config";
-import heroImg from "@/assets/4.png";
+import heroImg from "@/assets/tech.png";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About — siliqa" },
-      { name: "description", content: "siliqa builds premium electronics for people who care about the details. Learn our story." },
-      { property: "og:title", content: "About — siliqa" },
+      { title: "About — welded" },
+      { name: "description", content: "welded builds premium electronics for people who care about the details. Learn our story." },
+      { property: "og:title", content: "About — welded" },
     ],
   }),
   component: AboutPage,
@@ -29,7 +29,7 @@ function AboutPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-4 md:px-8 pb-16">
-        <img src={heroImg} alt="Chromepro" width={1600} height={1200} className="w-full rounded-3xl" />
+        <img src={heroImg} alt="Chromepro" width={800} height={600} className="w-1/2 mx-auto rounded-3xl" />
       </section>
 
       <section className="mx-auto max-w-6xl px-4 md:px-8 py-16 grid gap-12 md:grid-cols-3">

@@ -10,9 +10,9 @@ export const Route = createFileRoute("/product/$id")({
     const p = getProduct(params.id);
     return {
       meta: [
-        { title: p ? `${p.name} :siliqa` : "Product: siliqa" },
-        { name: "description", content: p?.description.slice(0, 155) ?? "Premium electronics from siliqa." },
-        { property: "og:title", content: p ? `${p.name} -siliqa` : "siliqa" },
+        { title: p ? `${p.name} :welded` : "Product: welded" },
+        { name: "description", content: p?.description.slice(0, 155) ?? "Premium electronics from welded." },
+        { property: "og:title", content: p ? `${p.name} -welded` : "welded" },
         { property: "og:description", content: p?.tagline ?? "" },
         ...(p ? [{ property: "og:image", content: p.images[0] }] : []),
       ],
@@ -102,7 +102,7 @@ function ProductPage() {
     },
     {
       k: "inbox",
-      title: "What's in the box",
+      title: "7-Day Returns & Refund Policy",
       body: (
         <ul className="space-y-2 text-sm">
           {product.inBox.map((i, k) => (
@@ -170,7 +170,7 @@ function ProductPage() {
 
         {/* Info */}
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground">siliqa</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground">welded</p>
           <h1 className="mt-2 font-display text-4xl font-bold tracking-tight md:text-5xl">{product.name}</h1>
           <p className="mt-2 text-muted-foreground">{product.tagline}</p>
 
@@ -242,7 +242,7 @@ function ProductPage() {
           <div className="mt-6 grid grid-cols-3 gap-3 text-xs">
             {[
               { Ic: Truck, t: "Free shipping" },
-              { Ic: ShieldCheck, t: "12-month warranty" },
+              { Ic: ShieldCheck, t: "Premium Support" },
               { Ic: RotateCcw, t: "7-day returns" },
             ].map((x, i) => (
               <div key={i} className="flex flex-col items-center gap-1 rounded-xl border border-border p-3 text-center">

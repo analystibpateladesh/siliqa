@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { useCart, useTheme } from "@/lib/store";
 import { BRAND } from "@/lib/config";
+import logo from "@/assets/welded_logo.png";
 import { submitEarlyAccess } from "@/lib/early-access.functions";
 
 export function AppShell() {
@@ -65,8 +66,7 @@ function NavBar() {
     <header className="sticky top-0 z-40 border-b border-border bg-background/80 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 md:px-8">
         <Link to="/" className="flex items-center gap-2">
-          <div className="h-7 w-7 rounded-full bg-chrome ring-1 ring-border" />
-          <span className="font-display text-xl font-bold tracking-tight">{BRAND.name}</span>
+          <img src={logo} alt={`${BRAND.name} logo`} className="h-16 w-54 rounded-full object-coverr" />
         </Link>
 
         <nav className="hidden md:flex items-center gap-8">
@@ -163,15 +163,27 @@ function Footer() {
       setBusy(false);
     }
   };
-
+  const socialLinks = [
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/welded.in",
+  },
+  {
+    label: "Facebook",
+    href: "https://www.facebook.com/people/Weldedin/61591500852213/",
+  },
+  {
+    label: "Twitter",
+    href: "https://x.com/yourusername",
+  },
+];
   return (
     <footer className="border-t border-footer-foreground/10 bg-footer text-white">
       <div className="mx-auto max-w-7xl px-4 md:px-8 py-16">
         <div className="grid gap-12 md:grid-cols-5">
           <div className="md:col-span-2">
             <div className="flex items-center gap-2">
-              <div className="h-8 w-8 rounded-full bg-chrome" />
-              <span className="font-display text-2xl font-bold text-white">{BRAND.name}</span>
+              <img src={logo} alt={`${BRAND.name} logo`} className="h-16 w-54 rounded-full object-cover" />
             </div>
             <p className="mt-4 max-w-sm text-sm text-white/70">
               {BRAND.tagline}. {BRAND.sub}
@@ -204,7 +216,7 @@ function Footer() {
             title="Shop"
             links={[
               { to: "/shop", label: "All Products" },
-              { to: "/product/chromepro-earphones", label: "Chromepro Earphones" },
+              { to: "/product/chromepro-earphones(type-c)", label: "ChromePro Earphones" },
               { to: "/track", label: "Track Order" },
               { to: "/cart", label: "Your Cart" },
             ]}
@@ -222,9 +234,8 @@ function Footer() {
             title="Support"
             links={[
               { to: "/contact", label: "Help Center" },
-              { to: "/contact", label: "Shipping & Returns" },
-              { to: "/contact", label: "Warranty" },
-              { to: "/contact", label: "Privacy Policy" },
+              { to: "/shipping", label: "Shipping & Returns" },
+              { to: "/privacy", label: "Privacy Policy" },
             ]}
           />
         </div>
@@ -234,16 +245,18 @@ function Footer() {
             © {new Date().getFullYear()} {BRAND.name}. All rights reserved.
           </p>
           <div className="flex items-center gap-3">
-            {["Instagram", "Twitter", "YouTube"].map((label, i) => (
-              <a
-                key={i}
-                href="#"
-                aria-label={label}
-                className="grid h-9 min-w-9 place-items-center rounded-full border border-footer-foreground/20 px-3 text-[10px] font-semibold uppercase tracking-widest text-white hover:bg-footer-foreground/10"
-              >
-                {label}
-              </a>
-            ))}
+            {socialLinks.map((social) => (
+  <a
+    key={social.label}
+    href={social.href}
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label={social.label}
+    className="grid h-9 min-w-9 place-items-center rounded-full border border-footer-foreground/20 px-3 text-[10px] font-semibold uppercase tracking-widest text-white hover:bg-footer-foreground/10"
+  >
+    {social.label}
+  </a>
+))}
           </div>
         </div>
       </div>

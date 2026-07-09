@@ -10,7 +10,7 @@ export const submitEarlyAccess = createServerFn({ method: "POST" })
   .handler(async ({ data }) => {
     const url = process.env.APPS_SCRIPT_EARLY_ACCESS_URL;
     if (!url) {
-      console.warn("[siliqa] APPS_SCRIPT_EARLY_ACCESS_URL not set. Skipping.");
+      console.warn("[welded] APPS_SCRIPT_EARLY_ACCESS_URL not set. Skipping.");
       return { ok: false, skipped: true as const };
     }
 

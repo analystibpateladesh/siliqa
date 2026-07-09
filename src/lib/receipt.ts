@@ -2,6 +2,8 @@ import { jsPDF } from "jspdf";
 import JsBarcode from "jsbarcode";
 import type { SavedOrder } from "./store";
 import { BRAND } from "./config";
+import logoImg from "@/assets/welded_logo.png";
+import signatureImg from "@/assets/sign.jpeg";
 
 function makeBarcodeDataUrl(text: string): string {
   const canvas = document.createElement("canvas");
@@ -15,26 +17,58 @@ function makeBarcodeDataUrl(text: string): string {
   return canvas.toDataURL("image/png");
 }
 
-export function downloadReceipt(order: SavedOrder) {
+// Loads an imported image asset and returns a PNG data URL + its aspect ratio,
+// so it can be dropped into the PDF at the right size via doc.addImage().
+function loadImageAsDataUrl(src: string): Promise<{ dataUrl: string; ratio: number }> {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+    img.onload = () => {
+      const canvas = document.createElement("canvas");
+      canvas.width = img.naturalWidth;
+      canvas.height = img.naturalHeight;
+      const ctx = canvas.getContext("2d");
+      if (!ctx) return reject(new Error("Canvas context unavailable"));
+      ctx.drawImage(img, 0, 0);
+      resolve({ dataUrl: canvas.toDataURL("image/png"), ratio: img.naturalWidth / img.naturalHeight });
+    };
+    img.onerror = () => reject(new Error(`Failed to load image: ${src}`));
+    img.src = src;
+  });
+}
+
+export async function downloadReceipt(order: SavedOrder) {
   const doc = new jsPDF({ unit: "pt", format: "a4" });
   const w = doc.internal.pageSize.getWidth();
   let y = 48;
 
-  // Header
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(24);
-  doc.text(BRAND.name, 40, y);
-  doc.setFont("helvetica", "normal");
-  doc.setFontSize(10);
-  doc.setTextColor(120);
-  doc.text(BRAND.tagline, 40, y + 16);
-  doc.setTextColor(0);
+  // Preload logo & signature — if either fails (missing file, network), we
+  // just fall back to text so the receipt still generates.
+  const [logoResult, signatureResult] = await Promise.allSettled([
+    loadImageAsDataUrl(logoImg),
+    loadImageAsDataUrl(signatureImg),
+  ]);
 
+  // Header
+  const logoH = 62;
+  if (logoResult.status === "fulfilled") {
+    const { dataUrl, ratio } = logoResult.value;
+    const logoW = logoH * ratio;
+    doc.addImage(dataUrl, "PNG", 40, y - 26, logoW, logoH);
+  } else {
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(24);
+    doc.text(BRAND.name, 40, y);
+  }
+
+  doc.setFont("helvetica", "bold");
   doc.setFontSize(11);
+  doc.setTextColor(0);
   doc.text("PAYMENT RECEIPT", w - 40, y, { align: "right" });
   doc.setFontSize(9);
-  doc.setTextColor(120);
+  doc.setTextColor(60);
   doc.text(new Date(order.createdAt).toLocaleString(), w - 40, y + 14, { align: "right" });
+  doc.setFont("helvetica", "normal");
   doc.setTextColor(0);
 
   y += 48;
@@ -54,7 +88,7 @@ export function downloadReceipt(order: SavedOrder) {
     doc.setTextColor(120);
     doc.text(k, 40, y + i * 16);
     doc.setTextColor(0);
-    doc.text(String(v), 150, y + i * 16);
+    doc.text(String(v), 118, y + i * 16);
   });
 
   const c = order.customer;
@@ -64,15 +98,20 @@ export function downloadReceipt(order: SavedOrder) {
     ["Phone", c.phone],
     ["Address", `${c.address1}${c.address2 ? ", " + c.address2 : ""}, ${c.city}, ${c.state} ${c.pincode}`],
   ];
-  metaRight.forEach(([k, v], i) => {
+  const rightLabelX = w / 2 + 10;
+  const rightValueX = w / 2 + 68;
+  const rightValueMaxWidth = w - 40 - rightValueX; // keep text inside the right margin
+  let ry = y;
+  metaRight.forEach(([k, v]) => {
     doc.setTextColor(120);
-    doc.text(k, w / 2 + 10, y + i * 16);
+    doc.text(k, rightLabelX, ry);
     doc.setTextColor(0);
-    const lines = doc.splitTextToSize(String(v), w / 2 - 60);
-    doc.text(lines, w / 2 + 80, y + i * 16);
+    const lines = doc.splitTextToSize(String(v), rightValueMaxWidth);
+    doc.text(lines, rightValueX, ry);
+    ry += lines.length * 13 + 4;
   });
 
-  y += 4 * 16 + 24;
+  y += Math.max(metaLeft.length * 16, ry - y) + 24;
   doc.setDrawColor(230);
   doc.line(40, y, w - 40, y);
   y += 20;
@@ -136,11 +175,18 @@ export function downloadReceipt(order: SavedOrder) {
   doc.setFontSize(9);
   doc.setTextColor(120);
   doc.text("Authorised Signatory", w - 120, sy + 14, { align: "center" });
-  doc.setFont("helvetica", "italic");
-  doc.setFontSize(14);
   doc.setTextColor(0);
-  doc.text(BRAND.name, w - 120, sy - 6, { align: "center" });
-  doc.setFont("helvetica", "normal");
+  if (signatureResult.status === "fulfilled") {
+    const { dataUrl, ratio } = signatureResult.value;
+    const sigH = 46;
+    const sigW = sigH * ratio;
+    doc.addImage(dataUrl, "PNG", w - 120 - sigW / 2, sy - sigH - 4, sigW, sigH);
+  } else {
+    doc.setFont("helvetica", "italic");
+    doc.setFontSize(14);
+    doc.text(BRAND.name, w - 120, sy - 6, { align: "center" });
+    doc.setFont("helvetica", "normal");
+  }
 
   y += 100;
   doc.setDrawColor(230);
@@ -156,5 +202,5 @@ export function downloadReceipt(order: SavedOrder) {
   );
   doc.text(`Support: ${BRAND.email} · ${BRAND.phone}`, w / 2, y + 12, { align: "center" });
 
-  doc.save(`siliqa-receipt-${order.orderId}.pdf`);
+  doc.save(`welded-receipt-${order.orderId}.pdf`);
 }

@@ -6,7 +6,7 @@ import { downloadReceipt } from "@/lib/receipt";
 import { BRAND } from "@/lib/config";
 
 export const Route = createFileRoute("/confirmation/$orderId")({
-  head: () => ({ meta: [{ title: "Order Confirmed — siliqa" }, { name: "robots", content: "noindex" }] }),
+  head: () => ({ meta: [{ title: "Order Confirmed — welded" }, { name: "robots", content: "noindex" }] }),
   component: ConfirmationPage,
 });
 

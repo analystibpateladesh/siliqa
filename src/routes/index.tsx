@@ -1,17 +1,18 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Zap, Battery, Waves, ShieldCheck, Star } from "lucide-react";
+import { ArrowRight, Cable, Droplets, Waves, ShieldCheck, Star } from "lucide-react";
 import heroImg from "@/assets/4.png";
 import chrome1 from "@/assets/ad.png";
 import chrome3 from "@/assets/chrome-ist.png";
+import chrome4 from "@/assets/tech.png";
 import { PRODUCTS } from "@/lib/products";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "siliqa — Chromepro Earphones · Premium Wireless Audio" },
-      { name: "description", content: "Mirror-finish wired earphones. Meet Chromepro from siliqa — starting ₹599." },
-      { property: "og:title", content: "siliqa — ChromePro Earphones" },
-      { property: "og:description", content: "The Element of Everything. Premium sound, mirror-polished design." },
+      { title: "welded — Chromepro Earphones · Type-C Wired Audio" },
+      { name: "description", content: "Mirror-finish Type-C wired earphones. Meet Chromepro from welded — starting ₹599." },
+      { property: "og:title", content: "welded — ChromePro Earphones" },
+      { property: "og:description", content: "Where Technology Meets Luxury. Premium sound, mirror-polished, Type-C wired design." },
     ],
   }),
   component: HomePage,
@@ -28,13 +29,13 @@ function HomePage() {
           <div className="grid gap-8 md:grid-cols-2 md:items-center">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground">
-                New · Chromepro Series
+                New · ChromePro Series
               </p>
               <h1 className="mt-4 font-display text-5xl font-bold leading-[0.95] tracking-tight md:text-7xl">
                 Sound, <span className="text-chrome">reflected</span>.
               </h1>
               <p className="mt-6 max-w-lg text-base text-muted-foreground md:text-lg">
-                Chromepro earphones - mirror-polished shell, built-to-move design, adaptive ENC. Built to move with you.
+                ChromePro earphones - electroplated mirror-chrome shell, Type-C wired,splash-proof. Built to move with you.
               </p>
               <div className="mt-8 flex flex-wrap items-center gap-3">
                 <Link
@@ -79,10 +80,10 @@ function HomePage() {
         <div className="border-y border-border bg-secondary">
           <div className="mx-auto grid max-w-7xl grid-cols-2 divide-x divide-border md:grid-cols-4">
             {[
-              { k: "40hr", v: "Total playback" },
-              { k: "13mm", v: "Titanium driver" },
-              { k: "IPX5", v: "Sweat resistant" },
-              { k: "60ms", v: "Low-latency" },
+              { k: "20-20Khz", v: "Frequency response" },
+              { k: "14.2mm", v: "Dynamic driver" },
+              { k: "0.5% ", v: "Low distortion" },
+              { k: "106dB", v: "High sensitivity" },
             ].map((s) => (
               <div key={s.k} className="p-6 text-center">
                 <div className="font-display text-3xl font-bold">{s.k}</div>
@@ -112,15 +113,14 @@ function HomePage() {
               Every frequency, on stage.
             </h2>
             <p className="mt-6 text-muted-foreground">
-              A custom 13mm titanium-coated driver, hand-tuned across 200+ passes. Deep, controlled bass. Vocals that
+              A 14.2mm dynamic driver, hand-tuned across 200+ passes. Deep, controlled bass. Vocals that
               breathe. Highs that don't sting.
             </p>
             <ul className="mt-8 space-y-4 text-sm">
               {[
-                { Icon: Waves, t: "Studio-grade tuning", d: "Balanced EQ curve, dialled in by our audio team." },
-                { Icon: Zap, t: "Bluetooth 5.3", d: "Rock-solid dual-device pairing, up to 15m range." },
-                { Icon: Battery, t: "10min = 2hr", d: "Fast-charge tech via USB-C. Never miss a beat." },
-                { Icon: ShieldCheck, t: "IPX5 rated", d: "Sweat, rain, splashes — Chromepro laughs at them." },
+                { Icon: Waves, t: "Studio-grade tuning", d: "20Hz–20kHz response, 106±3dB sensitivity, ≤0.5% distortion." },
+                { Icon: Cable, t: "Type-C wired", d: "Direct-plug 1m cord - zero latency, zero charging." },
+                { Icon: ShieldCheck, t: "Mirror-chrome shell", d: "Electroplated finish over a durable TPE cable." },
               ].map((f, i) => (
                 <li key={i} className="flex gap-4">
                   <f.Icon className="mt-0.5 h-5 w-5 shrink-0" />
@@ -146,7 +146,7 @@ function HomePage() {
               Chromepro Earphones.
             </h2>
             <p className="mt-6 max-w-xl text-primary-foreground/70">
-              Our flagship. Mirror-polished shell. 40 hours of playback. Sound engineered without compromise.
+              Our flagship. Mirror-polished shell. Sound engineered without compromise.
             </p>
             <div className="mt-8 flex items-baseline gap-3">
               <span className="font-display text-4xl font-bold">₹{product.tiers[0].price}</span>
@@ -160,12 +160,12 @@ function HomePage() {
               params={{ id: product.id }}
               className="mt-8 inline-flex items-center gap-2 rounded-full bg-primary-foreground px-6 py-3 text-sm font-semibold text-primary hover:opacity-90"
             >
-              Shop Chromepro <ArrowRight className="h-4 w-4" />
+              Shop ChromePro <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
           <img
-            src={chrome3}
-            alt="Chromepro on white"
+            src={chrome4}
+            alt="ChromePro on white"
             width={1200}
             height={1200}
             loading="lazy"
@@ -179,7 +179,7 @@ function HomePage() {
         <div className="flex items-end justify-between">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground">
-              Loved by 1.2k+ customers
+              Loved by 0.2k+ customers
             </p>
             <h2 className="mt-3 font-display text-4xl font-bold tracking-tight md:text-5xl">
               What people are saying.
@@ -194,10 +194,10 @@ function HomePage() {
             <span>{product.rating}/5 average</span>
           </div>
         </div>
-
-        <div className="mt-10 grid gap-6 md:grid-cols-3">
+ 
+        <div className="mt-10 divide-y divide-border">
           {product.reviews.slice(0, 3).map((r, i) => (
-            <div key={i} className="rounded-2xl border border-border p-6">
+            <div key={i} className="py-6 first:pt-0">
               <div className="flex items-center gap-1">
                 {Array.from({ length: r.rating }).map((_, k) => (
                   <Star key={k} className="h-3.5 w-3.5 fill-foreground text-foreground" />
@@ -205,7 +205,7 @@ function HomePage() {
               </div>
               <h3 className="mt-3 font-semibold">{r.title}</h3>
               <p className="mt-2 text-sm text-muted-foreground">{r.body}</p>
-              <div className="mt-6 text-xs text-muted-foreground">
+              <div className="mt-4 text-xs text-muted-foreground">
                 {r.name} · {r.date}
               </div>
             </div>
@@ -215,3 +215,4 @@ function HomePage() {
     </div>
   );
 }
+ 

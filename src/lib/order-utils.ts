@@ -1,15 +1,15 @@
-import { APPS_SCRIPT_ORDERS_URL, APPS_SCRIPT_CONTACT_URL } from "./config";
+import { APPS_SCRIPT_ORDERS_URL, APPS_SCRIPT_CONTACT_URL, BRAND } from "./config";
 import type { SavedOrder } from "./store";
 
 export function generateOrderId() {
   const rnd = Math.random().toString(36).slice(2, 8).toUpperCase();
   const time = Date.now().toString().slice(-6);
-  return `SLQ-${time}-${rnd}`;
+  return `WLD-${time}-${rnd}`;
 }
 
 export async function postToAppsScript(url: string, payload: Record<string, unknown>) {
   if (!url) {
-    console.warn("[siliqa] Apps Script URL not configured. Skipping post.", payload);
+    console.warn("[welded] Apps Script URL not configured. Skipping post.", payload);
     return { ok: false, skipped: true };
   }
   try {
@@ -69,7 +69,7 @@ export async function openRazorpay(opts: {
       order_id: opts.razorpayOrderId,
       amount: opts.amount,
       currency: "INR",
-      name: "siliqa",
+      name: BRAND.name,
       description: `Order ${opts.receiptId}`,
       prefill: {
         name: opts.customer.name,

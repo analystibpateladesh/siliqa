@@ -8,9 +8,9 @@ import { BRAND } from "@/lib/config";
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact — siliqa" },
-      { name: "description", content: "Get in touch with the siliqa team. We reply within 24 hours." },
-      { property: "og:title", content: "Contact — siliqa" },
+      { title: "Contact — welded" },
+      { name: "description", content: "Get in touch with the welded team. We reply within 24 hours." },
+      { property: "og:title", content: "Contact — welded" },
     ],
   }),
   component: ContactPage,

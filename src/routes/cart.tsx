@@ -3,7 +3,7 @@ import { Minus, Plus, X, ShoppingBag } from "lucide-react";
 import { useCart } from "@/lib/store";
 
 export const Route = createFileRoute("/cart")({
-  head: () => ({ meta: [{ title: "Your Cart -siliqa" }, { name: "robots", content: "noindex" }] }),
+  head: () => ({ meta: [{ title: "Your Cart - welded" }, { name: "robots", content: "noindex" }] }),
   component: CartPage,
 });
 

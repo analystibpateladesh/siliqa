@@ -3,7 +3,7 @@ import { useState } from "react";
 import { APPS_SCRIPT_ORDERS_URL } from "@/lib/config";
 
 export const Route = createFileRoute("/track")({
-  head: () => ({ meta: [{ title: "Track Order — siliqa" }] }),
+  head: () => ({ meta: [{ title: "Track Order — welded" }] }),
   component: Track,
 });
 
@@ -63,7 +63,7 @@ function Track() {
       const json: OrderData = await res.json();
 
       if (!json.found) {
-        setError("Double-check your Order ID and try again — it should look like SLQ-123456-ABCXYZ.");
+        setError("Double-check your Order ID and try again — it should look like WLD-123456-ABCXYZ.");
         setData(null);
         return;
       }
@@ -85,7 +85,7 @@ function Track() {
         <p className="text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground">Track order</p>
         <h1 className="mt-2 font-display text-4xl font-bold tracking-tight md:text-5xl">Track your order.</h1>
         <p className="mt-3 text-muted-foreground">
-          Enter your Order ID to see where your siliqa order is right now.
+          Enter your Order ID to see where your welded order is right now.
         </p>
       </div>
       <section className="mx-auto max-w-2xl px-6 pb-24 pt-10">
@@ -95,7 +95,7 @@ function Track() {
             type="text"
             value={orderId}
             onChange={(e) => setOrderId(e.target.value)}
-            placeholder="e.g. SLQ-123456-ABCXYZ"
+            placeholder="e.g. WLD-123456-ABCXYZ"
             autoComplete="off"
             className="flex-1 bg-transparent px-3 py-3 font-mono text-sm text-foreground outline-none placeholder:font-sans placeholder:text-muted-foreground"
           />
@@ -231,7 +231,7 @@ function Track() {
 
             <p className="mt-5 text-center text-sm text-muted-foreground">
               Any issue?{" "}
-              <a href="mailto:hello@siliqa.com" className="font-bold text-amber-600 underline">
+              <a href="mailto:hello@welded.com" className="font-bold text-amber-600 underline">
                 Contact our team
               </a>
             </p>
